@@ -8,7 +8,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import MenuIcon from '@mui/icons-material/Menu';
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore";
 import { RecipeSearch } from "./RecipeSearch";
-import { generateImages } from "./server/image";
+//import { generateImages } from "./server/image";
+
+import OpenAI from "openai";
 
 // USE THIS
 // Define types for inventory items
@@ -17,6 +19,21 @@ interface InventoryItem {
   picture: string;
   quantity: number;
 }
+
+export async function generateImages(x: string) {
+  const openai = new OpenAI();
+  const image = await openai.images.generate(
+    { 
+        model: "dall-e-3", 
+        prompt: x,
+        n: 1
+    });
+  console.log("Searching for Images")
+  console.log(image.data);
+  console.log(image.data[0].url);
+  return(image.data[0].url as string);
+}
+
 
 export default function Home() {
   // Define types for state variables

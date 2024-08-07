@@ -3,7 +3,6 @@
 import OpenAI from "openai";
 
 
-
 export async function generateImages(x: string) {
   const openai = new OpenAI();
   const image = await openai.images.generate(
