@@ -2,11 +2,10 @@
 
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+
 
 export async function generateImages(x: string) {
+  const openai = new OpenAI();
   const image = await openai.images.generate(
     { 
         model: "dall-e-3", 

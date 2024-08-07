@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { Card, CardContent, List, ListItem, ListItemText, styled } from "@mui/material";
-import { generateRecipes } from "../server/db";
+import { generateRecipes } from "./server/db";
 
 
 // Styled ListItem with custom spacing
