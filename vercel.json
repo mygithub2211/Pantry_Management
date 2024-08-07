@@ -1,0 +1,7 @@
+{
+    "functions": {
+      "app/server/db.ts": {
+        "maxDuration": 60
+      }
+    }
+  }
