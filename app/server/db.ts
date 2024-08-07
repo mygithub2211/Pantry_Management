@@ -1,7 +1,7 @@
 "use server"
 import { ChatOpenAI } from "@langchain/openai";
 
-export async function generateRecipes(prompt:string) {
+/*export async function generateRecipes(prompt:string) {
     const chatModel = new ChatOpenAI({
         apiKey: process.env.OPENAI_API_KEY
         //apiKey: process.env.NEXT_PUBLIC_API_KEY
@@ -10,14 +10,14 @@ export async function generateRecipes(prompt:string) {
     const response = await chatModel.invoke(prompt);
     //console.log(JSON.parse(response.content as string));
     return JSON.parse(response.content as string);
-}
+}*/
 
 import OpenAI from "openai";
 
-export async function main(x: string) {
+export async function POST(x: string) {
   const openai = new OpenAI({
-    //apiKey: process.env.NEXT_PUBLIC_API_KEY,
     apiKey: process.env.OPENAI_API_KEY
+    //apiKey: process.env.NEXT_PUBLIC_API_KEY,
   });
   const image = await openai.images.generate(
     { 

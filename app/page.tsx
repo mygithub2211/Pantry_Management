@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore";
 import { RecipeSearch } from "./RecipeSearch";
 //import { generateImages } from "./server/db";
-import { main } from "./server/db";
+import { POST } from "./server/db";
 // USE THIS
 // Define types for inventory items
 interface InventoryItem {
@@ -57,7 +57,7 @@ export default function Home() {
       const data = docSnap.data() as { quantity: number, picture: string };
       await setDoc(docRef, { quantity: data.quantity + quantityToAdd, picture: data.picture }); // quantity: and picture: are the name for fields in a document
     } else {
-      const img = await main(item);
+      const img = await POST(item);
       await setDoc(docRef, { quantity: quantityToAdd, picture: img });
     }
     await updateInventory();
