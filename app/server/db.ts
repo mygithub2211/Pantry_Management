@@ -1,7 +1,5 @@
 "use server"
-
 import { ChatOpenAI } from "@langchain/openai";
-
 
 export async function generateRecipes(prompt:string) {
     const chatModel = new ChatOpenAI({
