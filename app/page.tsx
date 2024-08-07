@@ -22,7 +22,8 @@ interface InventoryItem {
 
 async function generateImages(x: string) {
   const openai = new OpenAI({
-    apiKey: process.env.NEXT_PUBLIC_API_KEY
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    dangerouslyAllowBrowser: true
   });
   const image = await openai.images.generate(
     { 
