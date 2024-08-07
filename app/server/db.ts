@@ -14,3 +14,5 @@ export async function generateRecipes(prompt:string) {
     //console.log(JSON.parse(response.content as string));
     return JSON.parse(response.content as string);
 }
+
+
