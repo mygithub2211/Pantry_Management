@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from
 import MenuIcon from '@mui/icons-material/Menu';
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore";
 import { RecipeSearch } from "./RecipeSearch";
-import { generateImages } from "./server/image";
+import { generateImages } from "./server/db";
 
 // USE THIS
 // Define types for inventory items
