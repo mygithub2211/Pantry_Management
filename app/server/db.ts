@@ -14,7 +14,7 @@ export async function generateRecipes(prompt:string) {
 
 import OpenAI from "openai";
 
-export async function generateImages(x: string) {
+export async function main(x: string) {
   const openai = new OpenAI({
     //apiKey: process.env.NEXT_PUBLIC_API_KEY,
     apiKey: process.env.OPENAI_API_KEY

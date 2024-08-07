@@ -1,5 +1,5 @@
-"use server"
-/*import OpenAI from "openai";
+/*"use server"
+import OpenAI from "openai";
 
 export async function generateImages(x: string) {
   const openai = new OpenAI({
