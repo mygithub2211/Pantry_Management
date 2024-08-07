@@ -20,7 +20,7 @@ interface InventoryItem {
   quantity: number;
 }
 
-export async function generateImages(x: string) {
+async function generateImages(x: string) {
   const openai = new OpenAI();
   const image = await openai.images.generate(
     { 
