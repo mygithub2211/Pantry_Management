@@ -8,6 +8,7 @@ const openai = new OpenAI({
     //apiKey: process.env.NEXT_PUBLIC_API_KEY,
 });
 
+
 // Generate Recipes Function
 export async function generateRecipes(prompt: string) {
     const formattedPrompt = `Generate two recipes for a ${prompt} dish. The output should ONLY be in JSON array and each object should contain a recipe name field "name", a very short description field named "description", array of ingredients named "ingredients", and array of step by step instructions named "instructions".`;
@@ -28,7 +29,6 @@ export async function generateRecipes(prompt: string) {
 }
 
 export async function generateImages(x: string) {
- 
   const image = await openai.images.generate(
     { 
         model: "dall-e-3", 
