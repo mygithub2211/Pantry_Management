@@ -7,9 +7,9 @@ import { Box, Button, Stack, TextField, Typography, Paper, Drawer, List, ListIte
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore";
-//import { RecipeSearch } from "./RecipeSearch";
-//import { generateImages } from "./server/db";
-import { GET } from "./server/db";
+import { RecipeSearch } from "./RecipeSearch";
+import { generateImages } from "./server/db";
+
 // USE THIS
 // Define types for inventory items
 interface InventoryItem {
@@ -57,7 +57,7 @@ export default function Home() {
       const data = docSnap.data() as { quantity: number, picture: string };
       await setDoc(docRef, { quantity: data.quantity + quantityToAdd, picture: data.picture }); // quantity: and picture: are the name for fields in a document
     } else {
-      const img = await GET(item);
+      const img = await generateImages(item);
       await setDoc(docRef, { quantity: quantityToAdd, picture: img });
     }
     await updateInventory();
@@ -232,10 +232,10 @@ export default function Home() {
             </TableContainer>
           </Box>
 
-          {/*<Button variant="contained" onClick={() => setShowRecipeSearch(!showRecipeSearch)}>
+          <Button variant="contained" onClick={() => setShowRecipeSearch(!showRecipeSearch)}>
             Looking For a Recipe?
           </Button>
-          {showRecipeSearch && <RecipeSearch />}*/}
+          {showRecipeSearch && <RecipeSearch />}
         </>
       )}
     </Box>
