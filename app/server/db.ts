@@ -1,11 +1,7 @@
 "use server"
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-    //apiKey: process.env.NEXT_PUBLIC_API_KEY,
-});
-
+const openai = new OpenAI();
 
 // Generate Recipes Function
 export async function generateRecipes(prompt: string) {
