@@ -1,8 +1,8 @@
 "use client"
-import React, { useState } from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
-import { Card, CardContent, List, ListItem, ListItemText, styled } from "@mui/material";
-import { generateRecipes } from "./server/db";
+import React, { useState } from 'react'
+import { Box, Button, TextField, Typography } from '@mui/material'
+import { Card, CardContent, List, ListItem, ListItemText, styled } from "@mui/material"
+import { generateRecipes } from "./server/db"
 
 // Styled ListItem with custom spacing
 const BulletListItem = styled(ListItem)(({ theme }) => ({
@@ -14,23 +14,23 @@ const BulletListItem = styled(ListItem)(({ theme }) => ({
     fontSize: '1.2rem',
     marginRight: theme.spacing(1),
   }
-}));
+}))
 
 function RecipeSearch() {
-  const [prompt, setPrompt] = useState<string>("");
-  const [recipes, setRecipes] = useState<any[]>([]);
+  const [prompt, setPrompt] = useState<string>("")
+  const [recipes, setRecipes] = useState<any[]>([])
 
   async function handleSearch() {
-    console.log("Searching for:", prompt);
-    let r = await generateRecipes(prompt);
-    setRecipes(r);
+    console.log("Searching for:", prompt)
+    let r = await generateRecipes(prompt)
+    setRecipes(r)
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-     handleSearch();
+     handleSearch()
     }
-  };
+  }
 
   return (
     <Box 
@@ -98,7 +98,7 @@ function RecipeSearch() {
         ))}
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export { RecipeSearch };
+export { RecipeSearch }

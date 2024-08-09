@@ -1,97 +1,97 @@
 // Home.tsx
 "use client"
-import React, { useState, useEffect, KeyboardEvent } from "react";
-import { firestore } from "@/firebase";
-import { DocumentData } from "firebase/firestore";
-import { Box, Button, Stack, TextField, Typography, Paper, Drawer, List, ListItem, ListItemText, Divider } from "@mui/material";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore";
-import { RecipeSearch } from "./RecipeSearch";
-import { generateImages } from "./server/db";
+import React, { useState, useEffect, KeyboardEvent } from "react"
+import { firestore } from "@/firebase"
+import { DocumentData } from "firebase/firestore"
+import { Box, Button, Stack, TextField, Typography, Paper, Drawer, List, ListItem, ListItemText, Divider } from "@mui/material"
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
+import MenuIcon from '@mui/icons-material/Menu'
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore"
+import { RecipeSearch } from "./RecipeSearch"
+import { generateImages } from "./server/db"
 
 // USE THIS
 // Define types for inventory items
 interface InventoryItem {
-  name: string;
-  picture: string;
-  quantity: number;
+  name: string
+  picture: string
+  quantity: number
 }
-export const maxDuration = 60; // This function can run for a maximum of 60 seconds
+export const maxDuration = 60 // This function can run for a maximum of 60 seconds
  
 export default function Home() {
   // Define types for state variables
-  const [inventory, setInventory] = useState<InventoryItem[]>([]);
-  const [itemName, setItemName] = useState<string>("");
-  const [amount, setAmount] = useState<string>("");
-  const [showRecipeSearch, setShowRecipeSearch] = useState<boolean>(false);
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const [isHomePage, setIsHomePage] = useState<boolean>(true); // State to toggle between home page and main page
+  const [inventory, setInventory] = useState<InventoryItem[]>([])
+  const [itemName, setItemName] = useState<string>("")
+  const [amount, setAmount] = useState<string>("")
+  const [showRecipeSearch, setShowRecipeSearch] = useState<boolean>(false)
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
+  const [isHomePage, setIsHomePage] = useState<boolean>(true) // State to toggle between home page and main page
 
   const updateInventory = async () => {
-    const snapshot = query(collection(firestore, "inventory"));
-    const docs = await getDocs(snapshot);
-    const inventoryList: InventoryItem[] = [];
+    const snapshot = query(collection(firestore, "inventory"))
+    const docs = await getDocs(snapshot)
+    const inventoryList: InventoryItem[] = []
 
     docs.forEach((doc) => {
-      const data = doc.data() as DocumentData;
+      const data = doc.data() as DocumentData
       inventoryList.push({
         name: doc.id, //doc.id is the field in database
         picture: data.picture, // data.picture is the field in database
         quantity: data.quantity || 0 // Default to 0 if quantity is not defined
-      });
-    });
-    setInventory(inventoryList);
-  };
+      })
+    })
+    setInventory(inventoryList)
+  }
 
   const addItem = async (item: string) => {
-    const docRef = doc(collection(firestore, "inventory"), item);
-    const docSnap = await getDoc(docRef);
-    let quantityToAdd = 1; // Default to 1 if amount is not a valid number
+    const docRef = doc(collection(firestore, "inventory"), item)
+    const docSnap = await getDoc(docRef)
+    let quantityToAdd = 1 // Default to 1 if amount is not a valid number
 
     // Check if amount is a valid number
     if (!isNaN(Number(amount)) && Number(amount) > 0) {
-      quantityToAdd = Number(amount);
+      quantityToAdd = Number(amount)
     }
 
     if (docSnap.exists()) {
-      const data = docSnap.data() as { quantity: number, picture: string };
-      await setDoc(docRef, { quantity: data.quantity + quantityToAdd, picture: data.picture }); // quantity: and picture: are the name for fields in a document in the database
+      const data = docSnap.data() as { quantity: number, picture: string }
+      await setDoc(docRef, { quantity: data.quantity + quantityToAdd, picture: data.picture }) // quantity: and picture: are the name for fields in a document in the database
     } else {
-      const img = await generateImages(item);
-      await setDoc(docRef, { quantity: quantityToAdd, picture: img });
+      const img = await generateImages(item)
+      await setDoc(docRef, { quantity: quantityToAdd, picture: img })
     }
-    await updateInventory();
-  };
+    await updateInventory()
+  }
 
   const removeItem = async (item: string) => {
-    const docRef = doc(collection(firestore, "inventory"), item);
-    const docSnap = await getDoc(docRef);
+    const docRef = doc(collection(firestore, "inventory"), item)
+    const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
-      const data = docSnap.data() as { quantity: number, picture: string };
+      const data = docSnap.data() as { quantity: number, picture: string }
       if (data.quantity === 1) {
-        await deleteDoc(docRef);
+        await deleteDoc(docRef)
       } else {
-        await setDoc(docRef, { quantity: data.quantity - 1, picture: data.picture });
+        await setDoc(docRef, { quantity: data.quantity - 1, picture: data.picture })
       }
     }
-    await updateInventory();
-  };
+    await updateInventory()
+  }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (itemName.trim() && amount.trim()) {
-        addItem(itemName);
-        setItemName("");
-        setAmount("");
+        addItem(itemName)
+        setItemName("")
+        setAmount("")
       }
     }
-  };
+  }
 
   useEffect(() => {
-    updateInventory();
-  }, []);
+    updateInventory()
+  }, [])
 
   return (
     <Box 
@@ -187,9 +187,9 @@ export default function Home() {
                   variant="outlined"
                   onClick={() => {
                     if (itemName.trim() && amount.trim()) {
-                      addItem(itemName);
-                      setItemName("");
-                      setAmount("");
+                      addItem(itemName)
+                      setItemName("")
+                      setAmount("")
                     }
                   }}
                 >
@@ -240,5 +240,5 @@ export default function Home() {
         </>
       )}
     </Box>
-  );
+  )
 }
