@@ -21,8 +21,8 @@ export async function generateRecipes(prompt: string) {
             const final_ans = JSON.parse(answer);
             console.log(final_ans);
             return final_ans;
-        } catch (error) {
-            console.error("Failed to parse JSON:", error.message);
+        } catch (err) {
+            console.error("Failed to parse JSON:");
             throw new Error("Failed to parse JSON from OpenAI API response");
         }
     } else {
