@@ -36,8 +36,8 @@ export default function Home() {
     docs.forEach((doc) => {
       const data = doc.data() as DocumentData;
       inventoryList.push({
-        name: doc.id,
-        picture: data.picture,
+        name: doc.id, //doc.id is the field in database
+        picture: data.picture, // data.picture is the field in database
         quantity: data.quantity || 0 // Default to 0 if quantity is not defined
       });
     });
@@ -56,7 +56,7 @@ export default function Home() {
 
     if (docSnap.exists()) {
       const data = docSnap.data() as { quantity: number, picture: string };
-      await setDoc(docRef, { quantity: data.quantity + quantityToAdd, picture: data.picture }); // quantity: and picture: are the name for fields in a document
+      await setDoc(docRef, { quantity: data.quantity + quantityToAdd, picture: data.picture }); // quantity: and picture: are the name for fields in a document in the database
     } else {
       const img = await generateImages(item);
       await setDoc(docRef, { quantity: quantityToAdd, picture: img });
