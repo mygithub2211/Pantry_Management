@@ -29,7 +29,7 @@ export default function Home() {
   const [isHomePage, setIsHomePage] = useState<boolean>(true) // State to toggle between home page and main page
 
   const updateInventory = async () => {
-    const snapshot = query(collection(firestore, "inventory"))
+    const snapshot = query(collection(firestore, "inventories"))
     const docs = await getDocs(snapshot)
     const inventoryList: InventoryItem[] = []
 
@@ -45,7 +45,7 @@ export default function Home() {
   }
 
   const addItem = async (item: string) => {
-    const docRef = doc(collection(firestore, "inventory"), item)
+    const docRef = doc(collection(firestore, "inventories"), item)
     const docSnap = await getDoc(docRef)
     let quantityToAdd = 1 // Default to 1 if amount is not a valid number
 
@@ -65,7 +65,7 @@ export default function Home() {
   }
 
   const removeItem = async (item: string) => {
-    const docRef = doc(collection(firestore, "inventory"), item)
+    const docRef = doc(collection(firestore, "inventories"), item)
     const docSnap = await getDoc(docRef)
 
     if (docSnap.exists()) {
