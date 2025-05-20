@@ -5,7 +5,7 @@ const openai = new OpenAI()
 
 // Generate Recipes Function
 export async function generateRecipes(prompt: string) {
-    const formattedPrompt = `Generate two recipes for a ${prompt} dish. The output should ONLY be in JSON array and each object should contain a recipe name field "name", a very short description field named "description", array of ingredients named "ingredients", and array of step by step instructions named "instructions".`
+    const formattedPrompt = `Genrate two recipes for a ${prompt} dish. The output should ONLY be in JSON array and each object should contain a recipe name field "name", a very short description field named "description", array of ingredients named "ingredients", and array of step by step instructions named "instructions".`
   
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
