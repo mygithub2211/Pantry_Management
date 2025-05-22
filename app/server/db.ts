@@ -41,6 +41,7 @@ export async function generateRecipes(prompt: string) {
     }
 }
 
+// this is an asynchronous function that generates pictures coresponding to user's input
 export async function generateImages(x: string) {
   const image = await openai.images.generate(
     { 
