@@ -1,5 +1,5 @@
 {
-  "name": "pantry_tracker",
+  "name": "pantry_management",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,7 +17,7 @@
     "firebase": "^10.12.5",
     "next": "^14.2.5",
     "openai": "^4.54.0",
-    "pantry_tracker": "file:",
+    "pantry_management": "file:",
     "react": "^18",
     "react-dom": "^18"
   },
