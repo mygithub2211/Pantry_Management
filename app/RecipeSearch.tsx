@@ -51,7 +51,8 @@ export function RecipeSearch() {
         /> 
 
       <Button type="submit" variant="contained" onClick={handleSearch}>Search</Button> {/* search button */}
-
+      
+      {/* now we will work with the recipes array */}
       <Box display="flex" flexDirection="row" flexWrap="wrap" marginTop={3} gap={2}> {/* cards position */}
         {recipes.length > 0 && recipes.map((recipe, index) => ( // loop through an array of objects that was returned by db.ts, recipe will be each object
           <Card 

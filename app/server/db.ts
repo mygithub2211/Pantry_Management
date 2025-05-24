@@ -48,7 +48,7 @@ export async function generateImages(x: string) {
         model: "dall-e-3", 
         prompt: x,
         n: 1
-    })
+  })
   console.log("Searching for Images")
   console.log(image.data)
   console.log(image.data[0].url)
