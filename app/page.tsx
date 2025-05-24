@@ -263,7 +263,8 @@ export default function Home() {
               </Table>
             </TableContainer>
           </Box>
-
+          
+          {/* where to look for a recipe */}
           <Button variant="contained" onClick={() => setShowRecipeSearch(!showRecipeSearch)}>
             Looking For a Recipe?
           </Button>
