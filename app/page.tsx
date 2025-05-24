@@ -239,9 +239,9 @@ export default function Home() {
 
                 <TableBody>
                   {inventory.map(({name, picture, quantity}) => (
-                    <TableRow sx={{ borderBottom: "1px solid #000" }}>
+                    <TableRow key={name} sx={{ borderBottom: "1px solid #000" }}>
                       {/* picture and quantity */}
-                      <TableCell key = {name} component="th" scope="row">
+                      <TableCell component="th" scope="row">
                         {picture ? (<img src={picture} alt={name} width={50} height={50} style={{ objectFit: "cover" }} />) : ("No Image")}
                       </TableCell>
                       <TableCell align="right">{quantity}</TableCell>
